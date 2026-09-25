@@ -1,13 +1,24 @@
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.pool import QueuePool
 
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
     "postgresql://postgres:postgres@localhost:5432/handanzh"
 )
 
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+# pool_pre_ping + 限制池大小：Neon 的 pooler(Pgbouncer) 不支持长连接复用，
+# 连接池过大会累积闲置连接触发 "server closed connection unexpectedly"。
+# Neon 官方建议每容器连接池保持较小（<=5），配合 pre_ping 自动回收断连。
+engine = create_engine(
+    DATABASE_URL,
+    poolclass=QueuePool,
+    pool_size=5,
+    max_overflow=5,
+    pool_recycle=600,
+    pool_pre_ping=True,
+)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 

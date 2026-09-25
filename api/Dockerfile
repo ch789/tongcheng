@@ -12,8 +12,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# 创建上传目录
-RUN mkdir -p /app/uploads
+# 创建上传目录，并把种子图（git 里的 static_seed/admin/*.jpg）打进镜像，
+# 使 Neon 数据里 /uploads/admin/*.jpg 的相对路径在容器内可访问
+RUN mkdir -p /app/uploads/admin
+RUN cp -f static_seed/admin/*.jpg /app/uploads/admin/ 2>/dev/null || true
 
 EXPOSE 8000
 

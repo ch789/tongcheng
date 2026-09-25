@@ -1,0 +1,27 @@
+# SnapDeploy 用：PostgreSQL 容器
+# 单独起一个 Postgres，API 容器通过 DATABASE_URL 连接它。
+# 本地等价命令：
+#   docker run -d --name handanzh-db -e POSTGRES_USER=postgres \
+#     -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=handanzh \
+#     -p 5432:5432 -v pgdata:/var/lib/postgresql/data postgres:16
+
+image: postgres:16
+
+container_name: handanzh-db
+
+environment:
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres      # 上线前改成强密码
+  POSTGRES_DB: handanzh
+
+ports:
+  # 若 Postgres 只在内网被 API 访问，可只绑 127.0.0.1:5432 不暴露公网
+  - "5432:5432"
+
+volumes:
+  - pgdata:/var/lib/postgresql/data    # 数据持久化，重建容器不丢数据
+
+restart: unless-stopped
+
+volumes:
+  pgdata:
