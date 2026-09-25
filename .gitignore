@@ -1,0 +1,77 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+pip-wheel-metadata/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environment
+venv/
+env/
+.venv/
+.env
+
+# Node.js
+node_modules/
+dist/
+build/
+.nuxt/
+.DS_Store
+
+# Environment variables
+*.local
+.env
+.env.local
+.env.*.local
+
+# Uploads (contains user-generated images)
+api/uploads/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+logs/
+/tmp/
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Build artifacts (keep src, discard dist)
+admin/node_modules/
+admin/dist/
+h5/node_modules/
+h5/dist/
+
+# Claude Code / 业务文档(不公开)
+CLAUDE.md
+*PRD.md
+
+# Claude 会话/历史/临时文件(不公开、不推)
+.claude/
+.claude.local/
+*.session
+*.transcript
+.DS_Store/

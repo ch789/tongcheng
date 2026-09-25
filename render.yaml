@@ -1,0 +1,56 @@
+# Render Blueprint — 同城老乡服务平台（MVP，免费档）
+#
+# 用法：Render → New → Blueprint（关联本仓库），一次建齐 4 资源：
+#   1) Postgres（free）  2) API web service（Docker）
+#   3) H5 静态站         4) Admin 静态站
+#
+# ⚠️ 域名占位说明（chicken-and-egg）：
+#   下方 BASE_URL / VITE_API_URL 是占位。首次部署 API 后，Render 会给它分配
+#   真实域名 https://<api-name>.onrender.com。回填步骤：
+#     - API 服务的 BASE_URL        →  https://<api-name>.onrender.com
+#     - H5/Admin 的 VITE_API_URL   →  https://<api-name>.onrender.com/api
+#   然后重部署这三个服务即可。
+
+databases:
+  - name: handanzh-db
+    plan: free
+
+services:
+  # ---------- API（FastAPI，复用现成 api/Dockerfile）----------
+  - type: web
+    name: api
+    rootDir: api/
+    plan: free
+    runtime: docker
+    dockerfilePath: api/Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase: handanzh-db
+        property: connectionString
+      - key: SECRET_KEY
+        value: "CHANGE_ME_REPLACE_WITH_RANDOM_64_HEX" # 部署后替换随机值
+      - key: BASE_URL
+        value: https://YOUR_API.onrender.com # 占位，部署后回填真实 API 域名
+
+  # ---------- H5（Vue3 + Vant，静态站，跨域直连 API）----------
+  - type: static
+    name: h5
+    rootDir: h5/
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    staticRoot: h5
+    envVars:
+      - key: VITE_API_URL
+        value: https://YOUR_API.onrender.com/api # 占位，部署后回填
+
+  # ---------- Admin（Vue3 + Element Plus，静态站，跨域直连 API）----------
+  - type: static
+    name: admin
+    rootDir: admin/
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    staticRoot: admin
+    envVars:
+      - key: VITE_API_URL
+        value: https://YOUR_API.onrender.com/api # 占位，部署后回填
