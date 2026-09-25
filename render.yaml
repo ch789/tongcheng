@@ -29,9 +29,9 @@ services:
         fromDatabase: handanzh-db
         property: connectionString
       - key: SECRET_KEY
-        value: "CHANGE_ME_REPLACE_WITH_RANDOM_64_HEX" # 部署后替换随机值
+        value: "20de405af1fbb704fafe0eae8823278e7e9a184fef718f3e99bbd9c22fb3dc6e"
       - key: BASE_URL
-        value: https://YOUR_API.onrender.com # 占位，部署后回填真实 API 域名
+        value: https://<你的API服务名>.onrender.com # 首次部署API后回填为真实域名
 
   # ---------- H5（Vue3 + Vant，静态站，跨域直连 API）----------
   - type: static
@@ -42,7 +42,7 @@ services:
     staticRoot: h5
     envVars:
       - key: VITE_API_URL
-        value: https://YOUR_API.onrender.com/api # 占位，部署后回填
+        value: https://<你的API服务名>.onrender.com/api # 首次部署API后回填
 
   # ---------- Admin（Vue3 + Element Plus，静态站，跨域直连 API）----------
   - type: static
@@ -53,4 +53,4 @@ services:
     staticRoot: admin
     envVars:
       - key: VITE_API_URL
-        value: https://YOUR_API.onrender.com/api # 占位，部署后回填
+        value: https://<你的API服务名>.onrender.com/api # 首次部署API后回填
