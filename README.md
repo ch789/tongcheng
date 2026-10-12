@@ -1,7 +1,13 @@
 # 同城老乡服务平台
 
-面向在外生活、工作、经商的同乡的一站式综合服务平台：找商户、找活动、找同乡服务。
+面向在外生活、工作、经商的同乡的一站式综合服务平台：找商户、找活动、找同乡服务。增进同乡感情、促进商机合作、推进产业构建。
+系统支持商户入驻、产品发布、活动报名和数据导出等功能。
 包含 H5 用户端、管理后台、FastAPI 后端三部分。
+
+<img width="393" height="852" alt="IMG_3014" src="https://github.com/user-attachments/assets/121027fe-8bcb-49bd-bd58-6f085c9b082f" />
+<img width="393" height="852" alt="IMG_3015" src="https://github.com/user-attachments/assets/7a658060-1665-4763-a78f-55eca874e982" />
+<img width="393" height="852" alt="IMG_3016" src="https://github.com/user-attachments/assets/b4fbbdad-de6b-4f28-be50-203a47553bb2" />
+<img width="1356" height="675" alt="同城老乡服务平台 - 管理后台" src="https://github.com/user-attachments/assets/c2e1bb54-c67d-4e9b-8bb4-e19ed04fabfa" />
 
 ## 目录结构
 
